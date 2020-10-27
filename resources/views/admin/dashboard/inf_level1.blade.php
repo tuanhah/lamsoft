@@ -18,21 +18,63 @@
                         <li>
                             <div id="sparklinedash"></div>
                         </li>
-                        <li class="text-right"><i class="ti-arrow-up text-success"></i> <span class="counter text-success">{{$sensor_show->temp}}</span><span class="text-success">°C</span></li>
+                        <li class="text-right" id="temp"><i class="ti-arrow-up text-success"></i> <span class="counter text-success">{{$sensor_show['temp']}}</span><span class="text-success">°C</span></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6 col-xs-12">
+            <div id="popup-level-temp">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Sensor</th>
+                                <th>NHIỆT ĐỘ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($sensor_shows as $item)
+                            <tr class="odd gradeX">
+                                <td>{{$item['sensor_name']}}</td>
+                                <td>{{$item['temp']}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+               
+             </div>
+            <div class="col-lg-4 col-sm-6 col-xs-12" id ="hum">
                 <div class="white-box analytics-info">
                     <h3 class="page-title">Độ ẩm</h3>
                     <ul class="list-inline two-part">
                         <li>
                             <div id="sparklinedash2"></div>
                         </li>
-                        <li class="text-right"><i class="ti-arrow-up text-purple"></i> <span class="counter text-purple">{{$sensor_show->hum}}</span><span class="text-purple">%</span></li>
+                        <li class="text-right" id="hum"><i class="ti-arrow-up text-purple"></i> <span class="counter text-purple">{{$sensor_show['hum']}}</span><span class="text-purple">%</span></li>
                     </ul>
                 </div>
             </div>
+            <div id="popup-level-hum">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Sensor</th>
+                                <th>ĐỘ ẨM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($sensor_shows as $item)
+                            <tr class="odd gradeX">
+                                <td>{{$item['sensor_name']}}</td>
+                                <td>{{$item['hum']}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+               
+             </div>
             <div class="col-lg-4 col-sm-6 col-xs-12">
                 <div class="white-box analytics-info">
                     <h3 class="page-title">Độ ồn</h3>
@@ -113,6 +155,8 @@
     </div>
     <footer class="footer text-center"> Design by Bao Tran </footer>
 </div>
+
+<!-- Modal -->
 <script src="admin_asset/plugins/bower_components/jquery/dist/jquery.min.js"></script>
 <script>
 
@@ -211,7 +255,20 @@
             sparkResize = setTimeout(sparklineLogin, 500);
         });
         sparklineLogin();
+        // $('#temp').hover(funtion(){
+        //     alert(12344);
+        // })
     });
+    $('#temp').hover(function(e) {
+        $('#popup-level-temp').show();
+    }, function(e) {
+        $('#popup-level-temp').hide();
+    })
+    $('#hum').hover(function(e) {
+        $('#popup-level-hum').show();
+    }, function(e) {
+        $('#popup-level-hum').hide();
+    })
 
 
 </script>

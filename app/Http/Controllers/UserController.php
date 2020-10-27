@@ -10,6 +10,7 @@ use Hash;
 use App\Sensor;
 use App\Sensor_inf;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class UserController extends Controller
 {
@@ -132,8 +133,9 @@ class UserController extends Controller
         $data['sensor_show']= Sensor_inf::where('sensor_id',1)->latest()->first();
         $data['sensor_inf']= Sensor_inf::where('sensor_id',1)->paginate(10);
         if(Auth::attempt(['email'=>$email, 'password' => $password])){
-            return view("admin.dashboard.inf_level1",$data);
-            // return redirect('/admin/dashboard/inf');
+            // return view("admin.dashboard.inf_level1",$data);
+            $page = @Auth::user()->level ?? 1;
+            return redirect("/admin/dashboard/inf_level{$page}");
 
         }else{
             return redirect()->back()->with('thongbao','Email hoặc mật khẩu không đúng');

@@ -15,4 +15,13 @@ class Room extends Model
     public function sensor_inf(){
     	return $this->hasManyThrough('App\Sensor_inf','App\Sensor','room_id','sensor_id','id');
     }
+
+    public function getRoomByUserId($uid)
+    {
+        $room = Room::where('user_id', $uid)->first();
+        if ($room && $room->id) {
+            return $room->id;
+        }
+        return env('DEFAULT_ROOM', 1);
+    }
 }
