@@ -31,10 +31,10 @@
 						<label>Tên phòng</label>
 						<input class="form-control" name="room_name" placeholder="Nhập tên phòng" />
 					</div>
-					<div class="form-group">
+					{{-- <div class="form-group">
 						<label>Số cảm biến</label>
 						<input class="form-control" name="sensor_number" placeholder="Nhập số cảm biến" />
-					</div>
+					</div> --}}
 					<button type="submit" class="btn btn-default" value="{{$room_id->room_name}}">Sửa</button>
 					<button type="reset" class="btn btn-default">Làm mới</button>
 				</form>

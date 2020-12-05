@@ -32,10 +32,10 @@
                                 <input class="form-control" name="room_name" placeholder="Nhập tên phòng" />
                             </div>
                             <input type="hidden" name="user_id" value="{{Auth::User()->id}}">
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label>So cam bien</label>
                                 <input class="form-control" name="sensor_number" placeholder="Nhập số cảm biến" />
-                            </div>
+                            </div> --}}
                             
                             <button type="submit" class="btn btn-default">Thêm</button>
                             <button type="reset" class="btn btn-default">Làm mới</button>

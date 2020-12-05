@@ -106,7 +106,7 @@
             </div>
         </div>
 
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12">
                 <div class="white-box">
                     <h3 class="page-title">THÔNG SỐ GẦN ĐÂY</h3>
@@ -126,8 +126,9 @@
                             <tbody>
                                 @foreach($sensor_inf as $s)
                                 <tr class="odd gradeX">
-                                    <td>{{$s->id}}</td>
+                                    {{$s}}
                                     <td>{{$s->created_at}}</td>
+                                    <td>{{$s->id}}</td>
                                     <td>{{$s->temp}}°C </td>
                                     <td>{{$s->hum}}%</td>
                                     <td>50DB</td>
@@ -151,7 +152,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     <footer class="footer text-center"> Design by Bao Tran </footer>
 </div>
@@ -160,12 +161,12 @@
 <script src="admin_asset/plugins/bower_components/jquery/dist/jquery.min.js"></script>
 <script>
 
-    let data = <?= json_encode($sensor_inf); ?>;
-    console.log(<?= json_encode($sensor_inf); ?>);
+    let data = <?= json_encode($data_chart); ?>;
+    console.log(<?= json_encode($data_chart); ?>);
     const result = [[], []];
     const labels = [];
     const MAX_CHART_ITEM = 10;
-    const chartData = data.data.slice(Math.max(data.data.length - MAX_CHART_ITEM, 0));
+    const chartData = data.slice(Math.max(data.length - MAX_CHART_ITEM, 0));
     chartData.forEach(item => {
       result[0].push(item.hum)
       result[1].push(item.temp)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Room;
+use App\RoomUser;
 use Auth;
 use Hash;
 use App\Sensor;
@@ -51,7 +52,8 @@ class UserController extends Controller
     	$user->fullname=$request->fullname;
     	$user->email=$request->email;
         $user->phone_number=$request->phone_number;
-    	// $user->pass=bcrypt($request->pass);
+        // $user->pass=bcrypt($request->pass);
+        $user->avatar = "Capture.JPG";
         $user->password=Hash::make($request->password);
         if($request->hasFile('avatar')){
             $fileName = $request->avatar->getClientOriginalName();
@@ -60,9 +62,14 @@ class UserController extends Controller
             $request->avatar->move($folderPath, $fileName);
             $user->avatar = $fileName;
         }
-        $user->room_id=$request->room;
-    	$user->level=$request->level;
-    	$user->save();
+        $user->level=$request->level;
+        $user->save();
+        if ((int)($user->level) === 0 && !empty($request->room)) {
+            $roomUser = new RoomUser;
+            $roomUser->user_id = $user->id;
+            $roomUser->room_id = $request->room;
+            $roomUser->save();
+        }
 
     	return redirect('admin/user/add')->with('thongbao','Thêm thành công');
     }
@@ -110,7 +117,14 @@ class UserController extends Controller
             $request->avatar->move($folderPath, $fileName);
             $user->avatar = $fileName;
         }
-        $user->room_id=$request->room;
+        RoomUser::where('user_id', $id)->delete();
+        if ((int)($request->level) === 0 && !empty($request->room)) {
+            $roomUser = new RoomUser;
+            $roomUser->user_id = $id;
+            $roomUser->room_id = $request->room;
+            $roomUser->save();
+        }
+
 
         $user->save();
 

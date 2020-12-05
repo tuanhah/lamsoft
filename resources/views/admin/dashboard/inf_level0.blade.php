@@ -126,8 +126,8 @@
                             <tbody>
                                 @foreach($sensor_inf as $s)
                                 <tr class="odd gradeX">
-                                    <td>{{$s->id}}</td>
                                     <td>{{$s->created_at}}</td>
+                                    <td>{{$s->id}}</td>
                                     <td>{{$s->temp}}°C </td>
                                     <td>{{$s->hum}}%</td>
                                     <td>50DB</td>
@@ -158,16 +158,17 @@
 <script src="admin_asset/plugins/bower_components/jquery/dist/jquery.min.js"></script>
 <script>
 
-    let data = <?= json_encode($sensor_inf); ?>;
-    console.log(<?= json_encode($sensor_inf); ?>);
+    let data = <?= json_encode($data_chart); ?>;
+    console.log(<?= json_encode($data_chart); ?>);
     const result = [[], []];
     const labels = [];
     const MAX_CHART_ITEM = 10;
-    const chartData = data.data.slice(Math.max(data.data.length - MAX_CHART_ITEM, 0));
+    const chartData = data.slice(Math.max(data.length - MAX_CHART_ITEM, 0));
     chartData.forEach(item => {
       result[0].push(item.hum)
       result[1].push(item.temp)
       const createAt = new Date(item.created_at)
+      console.log(createAt);
       // createAt.setHours( createAt.getHours() + 1 );
       labels.push(`${createAt.getHours()}:${createAt.getMinutes()}:${createAt.getSeconds()} ${createAt.getDate()}/${createAt.getMonth()+1}/${createAt.getFullYear()}`)
 

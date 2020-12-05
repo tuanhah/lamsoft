@@ -28,8 +28,6 @@ class RoomController extends Controller
     		]);
     	$room = new Room;
     	$room->room_name=$request->room_name;
-        $room->sensor_number=$request->sensor_number;
-        $room->user_id=$request->user_id;
     	$room->save();
 
     	return redirect('admin/room/add')->with('thongbao','Thêm thành công');

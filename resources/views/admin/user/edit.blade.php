@@ -53,8 +53,26 @@
                                 <input type="file" class="form-control" name="avatar"/>
                             </div>
                             <div class="form-group">
+                                <label>Quyền người dùng</label>
+                                <label  class="radio-inline">
+                                    <input id="radio-edit-manager" name="level" value="1" 
+                                    @if($user->level==1) 
+                                    	{{"checked"}} 
+                                    @endif
+                                    type="radio" >Manager
+                                </label>
+                                <label class="radio-inline">
+                                    <input id="radio-edit-staff"  name="level" value="0"
+                                    @if($user->level==0) 
+                                    	{{"checked"}} 
+                                    @endif
+                                    type="radio" > Staff
+                                </label>
+                            </div>
+
+                            <div class="form-group">
                                 <label>Room</label>
-                                <select class="form-control" name="room">
+                                <select class="form-control" name="room" id="select-edit-room">
                                     @foreach($room as $r)
                                     <option 
                                     @if($user->room_id == $r->id)
@@ -63,24 +81,6 @@
                                     value="{{$r->id}}">{{$r->room_name}}</option>
                                     @endforeach
                                 </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Quyền người dùng</label>
-                                <label class="radio-inline">
-                                    <input name="level" value="1" 
-                                    @if($user->level==1) 
-                                    	{{"checked"}} 
-                                    @endif
-                                    type="radio">Manager
-                                </label>
-                                <label class="radio-inline">
-                                    <input name="level" value="0"
-                                    @if($user->level==0) 
-                                    	{{"checked"}} 
-                                    @endif
-                                    type="radio">Staff
-                                </label>
                             </div>
                             <button type="submit" class="btn btn-default">Sửa</button>
                             <button type="reset" class="btn btn-default">Làm mới</button>
@@ -104,7 +104,26 @@
 			else{
 				$(".password").attr('disabled','');
 			}
-		})
-	</script>
+        })
+        $('#radio-edit-manager').change(function() {
+        if( $(this).is(':checked') ) {
+            $("#select-edit-room").attr('disabled', 'disabled');
+            $("#select-edit-room").val("All");
+    
+        }
+     })
+     $('#radio-edit-staff').change(function() {
+        if( $(this).is(':checked') ) {
+            $("#select-edit-room").removeAttr('disabled');
+        }
+     })
+     $(document).ready(function() {
+     if ($('#radio-edit-manager').is(':checked')) {
+        $("#select-edit-room").attr('disabled', 'disabled');
+        $("#select-edit-room").val("All");
+     }
+ })
+    </script>
+   
 @endsection
 

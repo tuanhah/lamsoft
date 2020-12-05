@@ -24,7 +24,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Tên Phòng</th>
-                                    <th>Số cảm biến</th>
+                                    {{-- <th>Số cảm biến</th> --}}
                                     <th>Xóa</th>
                                     <th>sửa</th>
                                 </tr>
@@ -34,7 +34,7 @@
                                 <tr class="odd gradeX">
                                     <td>{{$r->id}}</td>
                                     <td>{{$r->room_name}}</td>
-                                    <td>{{$r->sensor_number}}</td>
+                                    {{-- <td>{{$r->sensor_number}}</td> --}}
                                     <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/room/delete/{{$r->id}}"> Xóa</a></td>
                                     <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/room/edit/{{$r->id}}">Sửa</a></td>
                                 </tr>

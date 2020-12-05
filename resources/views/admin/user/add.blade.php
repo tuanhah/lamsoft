@@ -52,21 +52,21 @@
                                 <input type="file" class="form-control" name="avatar"/>
                             </div>
                             <div class="form-group">
+                                <label>Quyền người dùng : &nbsp;</label>
+                                <label class="radio-inline">
+                                    <input name="level" id="radio-staff" value="0" checked type="radio">Staff
+                                </label>
+                                <label class="radio-inline">
+                                    <input name="level" id="radio-manager" value="1" type="radio">Manager
+                                </label>
+                            </div>
+                            <div class="form-group">
                                 <label>Room</label>
-                                <select class="form-control" name="room" >
+                                <select id="select-room" class="form-control" name="room" aria-placeholder="Select Room">
                                     @foreach($room as $r)
                                     <option value="{{$r->id}}">{{$r->room_name}}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Quyền người dùng</label>
-                                <label class="radio-inline">
-                                    <input name="level" value="1" checked="" type="radio">Manager
-                                </label>
-                                <label class="radio-inline">
-                                    <input name="level" value="0" type="radio">Staff
-                                </label>
                             </div>
                             <button type="submit" class="btn btn-default">Thêm</button>
                             <button type="reset" class="btn btn-default">Làm mới</button>
@@ -78,4 +78,22 @@
             <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
+<script src="admin_asset/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+ $('#radio-manager').click(function() {
+    if( $(this).is(':checked') ) {
+        $("#select-room").attr('disabled', 'disabled');
+        $("#select-room").val("All");
+
+    }
+ })
+ $('#radio-staff').click(function() {
+    if( $(this).is(':checked') ) {
+        $("#select-room").removeAttr('disabled');
+    }
+ })
+ $(document).ready(function() {
+     $('#radio-staff').attr('checked', 'checked');
+ })
+</script>
 @endsection
