@@ -7,6 +7,16 @@
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                 <h4 class="page-title">{{$sensor->sensor_name}}</h4>
             </div>                    
+            <div class="col-lg-4 col-md-3 col-sm-3"></div>
+            <div class="col-lg-5 col-md-5 col-sm-5">
+                
+            <form action="{{$url}}">
+                    <label>Select a time:</label>
+                <input type="date" value ='{{$time}}' id="date-chart" name="date">
+                    <input type="submit">
+                </form>
+                
+            </div>   
         </div>
 
         <div class="row">
@@ -22,7 +32,7 @@
                                     <th>NHIỆT ĐỘ</th>
                                     <th>ĐỘ ẨM</th>
                                     <th>ĐỘ ỒN</th>
-                                    <th>CẢNH BÁO</th>
+                                    <th>CẢNH BÁO({{$alert}})</th>
                                     <th>XỬ LÝ</th>
                                 </tr>
                             </thead>
@@ -52,7 +62,7 @@
 
                             </tbody>
                         </table>
-                        {{$sensor_inf->links()}}
+                        {{$sensor_inf->appends(request()->input())->links()}}
                     </div>
                 </div>
             </div>

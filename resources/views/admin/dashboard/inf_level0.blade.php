@@ -27,9 +27,9 @@
 
         <div class="row">
             <div class="col-lg-4 col-sm-6 col-xs-12">
-                <div class="white-box analytics-info temp">
+                <div class="white-box analytics-info">
                     <h3 class="page-title">Nhiệt độ</h3>
-                    <ul class="list-inline two-part" id="{{$info['idTemp']}}">
+                    <ul class="list-inline two-part" id="temp">
                         <li>
                             <div class="sparklinedash"></div>
                         </li>
@@ -62,9 +62,9 @@
                
              </div>
             <div class="col-lg-4 col-sm-6 col-xs-12" class ="hum">
-                <div class="white-box analytics-info hum">
+                <div class="white-box analytics-info">
                     <h3 class="page-title">Độ ẩm</h3>
-                    <ul class="list-inline two-part" id="{{$info['idHum']}}">
+                    <ul class="list-inline two-part" id="hum">
                         <li>
                             <div class="sparklinedash2"></div>
                         </li>
@@ -316,16 +316,16 @@
         });
         sparklineLogin();
     });
-    // $('.analytics-info.temp').hover(function(e) {
-    //     $('#popup-level-temp').show();
-    // }, function(e) {
-    //     $('#popup-level-temp').hide();
-    // })
-    // $('.analytics-info.hum').hover(function(e) {
-    //     $('#popup-level-hum').show();
-    // }, function(e) {
-    //     $('#popup-level-hum').hide();
-    // })
+    $('#temp').hover(function(e) {
+        $('#popup-level-temp').show();
+    }, function(e) {
+        $('#popup-level-temp').hide();
+    })
+    $('#hum').hover(function(e) {
+        $('#popup-level-hum').show();
+    }, function(e) {
+        $('#popup-level-hum').hide();
+    })
 
 
 </script>
